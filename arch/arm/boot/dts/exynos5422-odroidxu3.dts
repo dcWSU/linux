@@ -17,7 +17,7 @@
 
 / {
 	model = "Hardkernel Odroid XU3";
-	compatible = "hardkernel,odroid-xu3", "samsung,exynos5800", "samsung,exynos5";
+	compatible = "hardkernel,odroid-xu3", "samsung,exynos5422", "samsung,exynos5800", "samsung,exynos5";
 };
 
 /*

@@ -899,7 +899,14 @@ static const struct samsung_div_clock exynos5x_div_clks[] __initconst = {
 	/* UART and PWM */
 	DIV(0, "dout_uart0", "mout_uart0", DIV_PERIC0, 8, 4),
 	DIV(0, "dout_uart1", "mout_uart1", DIV_PERIC0, 12, 4),
+//#ifndef CONFIG_XEN
+/*
+ * UART2 is used as XEN console. We do not want dom0 poking at it.
+ * Note that the ouput gets garbled from this point on if this function
+ * is called
+ */
 	DIV(0, "dout_uart2", "mout_uart2", DIV_PERIC0, 16, 4),
+//#endif
 	DIV(0, "dout_uart3", "mout_uart3", DIV_PERIC0, 20, 4),
 	DIV(0, "dout_pwm", "mout_pwm", DIV_PERIC0, 28, 4),
 
@@ -1012,8 +1019,15 @@ static const struct samsung_gate_clock exynos5x_gate_clks[] __initconst = {
 		GATE_TOP_SCLK_PERIC, 0, CLK_SET_RATE_PARENT, 0),
 	GATE(CLK_SCLK_UART1, "sclk_uart1", "dout_uart1",
 		GATE_TOP_SCLK_PERIC, 1, CLK_SET_RATE_PARENT, 0),
+//#ifndef CONFIG_XEN
+/*
+ * UART2 is used as XEN console. We do not want dom0 poking at it.
+ * Note that the ouput gets garbled from this point on if this function
+ * is called
+ */
 	GATE(CLK_SCLK_UART2, "sclk_uart2", "dout_uart2",
 		GATE_TOP_SCLK_PERIC, 2, CLK_SET_RATE_PARENT, 0),
+//#endif
 	GATE(CLK_SCLK_UART3, "sclk_uart3", "dout_uart3",
 		GATE_TOP_SCLK_PERIC, 3, CLK_SET_RATE_PARENT, 0),
 	GATE(CLK_SCLK_SPI0, "sclk_spi0", "dout_spi0_pre",
